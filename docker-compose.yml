@@ -1,0 +1,13 @@
+services:
+  api:
+    build: .
+    ports: ["8000:8000"]
+    environment:
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      LLM_MODEL: ${LLM_MODEL:-claude-sonnet-5-5}
+      DOCS_DIR: ${DOCS_DIR:-/srv/sample_docs}
+      ENABLE_CODE_EXEC: ${ENABLE_CODE_EXEC:-0}
+    volumes:
+      - ./data:/srv/data
+      # to index your own docs, mount them and set DOCS_DIR=/docs:
+      # - ./my_docs:/docs:ro
